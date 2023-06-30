@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Player } from 'src/app/models/player.model';
+import { GameState } from 'src/app/reducers/game.reducer';
 
 @Component({
   selector: 'app-player-list',
@@ -7,16 +9,15 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./player-list.component.scss']
 })
 export class PlayerListComponent implements OnInit {
+  player?: Player;
 
-  players:any = [
-
-    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1 },
-    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2 },
-    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 },
-    { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 }
-  ]
-  constructor() {
+  // Récupérons le store grace a l'injection de dépendance
+  constructor(private store: Store<{ game: GameState }>) {
   }
-  ngOnInit() {
+
+  ngOnInit(): void {
+    this.store.select(state => state.game).subscribe((game: GameState) => {
+      this.player = game.player;
+    });
   }
 }

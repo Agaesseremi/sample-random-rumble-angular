@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CardListComponent } from './components/card-list/card-list.component';
+import { CardComponent } from './components/card/card.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +11,12 @@ import { PlayerListComponent } from './components/player-list/player-list.compon
 import { PlayerCardComponent } from './components/player-card/player-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { ButtonCapacityComponent } from './components/button-capacity/button-capacity.component';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { gameReducer } from './reducers/game.reducer';
+import { ButtonCardCapacityComponent } from '../app/components/button-card-capacity/button-card-capacity.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,11 +24,16 @@ import { ButtonCapacityComponent } from './components/button-capacity/button-cap
     PlayerListComponent,
     PlayerCardComponent,
     ProgressBarComponent,
-    ButtonCapacityComponent
+    ButtonCapacityComponent,
+    CardListComponent,
+    CardComponent,
+    ButtonCardCapacityComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ game: gameReducer }),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
