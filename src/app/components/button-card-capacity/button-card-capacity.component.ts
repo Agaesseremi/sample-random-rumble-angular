@@ -22,7 +22,7 @@ export class ButtonCardCapacityComponent {
 
     if (this.Player.mana >= this.Card.manaCost) {
       this.Card.action(this.store);
-      this.store.dispatch(hideCard())//hide the card in the view
+      this.store.dispatch(hideCard())//hide the card in the view(need to do)
     }
   }
 

@@ -4,14 +4,14 @@ import { IMonster, initialMonster } from '../models/monster.model';
 import { IPlayer, initialPlayers } from '../models/player.model';
 import { hitMonster } from '../actions/player.action';
 import { hitBack } from '../actions/monster.action';
-import { clearCheckIfPlayed, updateHand } from "../actions/game.action";
+import { clearCheckIfPlayed, initHand } from "../actions/game.action";
 import { incrementGameTurn } from "../actions/game.action";
 import { initialStabCard } from '../models/stabCard.model';
 import { initialHealCard } from "../models/healingCard.model";
 import { StabCard } from "../models/stabCard.model";
 import { HealCard } from '../models/healingCard.model';
 import { initialCards } from "../models/card-list.model";
-import { AddManaMax, HealPlayer, StabMonster } from "../actions/card.action";
+import { AddManaMax, HealPlayer, RemoveMana, StabMonster } from "../actions/card.action";
 import { Player } from "../models/player.model";
 import { state } from "@angular/animations";
 
@@ -23,7 +23,6 @@ export interface GameState {
     gameTurn: number;
     cards: Card[];
     hand: Card[];
-
 }
 
 export const initialState: GameState = {
@@ -32,8 +31,7 @@ export const initialState: GameState = {
     checkIfPlayed: [],
     gameTurn: 1,
     cards: initialCards,
-    hand: [],
-
+    hand: []
 };
 
 
@@ -41,7 +39,10 @@ export const gameReducer = createReducer(
     initialState,
     //method jeux de base
 
-    on(updateHand, (state, { hand }) => ({ ...state, hand })),
+    on(initHand, (state, { hand }) => ({
+        ...state,
+        hand: hand
+    })),
 
     on(hitMonster, (state, { damage }) => {
         return {
@@ -52,12 +53,13 @@ export const gameReducer = createReducer(
             }
         };
     }),
-    on(AddManaMax, (state, { addManaMax }) => {
+    on(AddManaMax, (state, { addManaMax, manaCost }) => {
         return {
             ...state,
             player: {
                 ...state.player,
-                manaMax: state.player.manaMax + addManaMax
+                manaMax: state.player.manaMax + addManaMax,
+                mana: state.player.mana - manaCost
             }
         };
     }),
@@ -111,6 +113,16 @@ export const gameReducer = createReducer(
             }
         };
     }),
+    on(RemoveMana, (state, { manaCost }) => {
+        return {
+            ...state,
+            player: {
+                ...state.player,
+                mana: state.player.mana - manaCost
+            }
+        };
+    }),
+
     //fin method jeux de base 
 
 

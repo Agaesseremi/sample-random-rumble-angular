@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { GameState } from 'src/app/reducers/game.reducer';
-import { StabCard } from "../../models/stabCard.model";
-import { HealCard } from "../../models/healingCard.model";
-import { map } from 'rxjs/operators';
 import { Card } from "../../models/card.model";
 import { Player } from 'src/app/models/player.model';
-import { updateHand } from 'src/app/actions/game.action';
+import { initHand } from 'src/app/actions/game.action';
+// import { HandService } from '../../services/hand-service.service
 
 @Component({
   selector: 'app-card-list',
@@ -17,27 +15,22 @@ export class CardListComponent implements OnInit {
   cards?: Card[];
   player?: Player;
   hand?: Card[];
-
-
+  randomHandGenerated = false; // Flag to track if the random hand has been generated
 
   // Récupérons le store grace a l'injection de dépendance
-  constructor(private store: Store<{ game: GameState }>) {
-
-  }
+  constructor(private store: Store<{ game: GameState }>) { }
 
   ngOnInit(): void {
     this.store.select(state => state.game).subscribe((game: GameState) => {
       this.cards = game.cards;
       this.player = game.player;
-      this.hand = game.hand;
-      // Randomly select 4 cards from the 'cards' arrayo
-      // You can use any randomization logic here
-      this.hand = this.getRandomCards([...this.cards], 4);
-
+      let hand: Card[] = []
+      if (game.hand.length === 0) { // Generate random hand only if it hasn't been generated before
+        hand = this.getRandomCards([...this.cards], 4);
+        this.store.dispatch(initHand({ hand }))
+      }
+      this.hand = game.hand.length ? game.hand : hand
       console.log(this.hand);
-
-
-
     })
   }
 

@@ -13,8 +13,8 @@ export class StabCard extends Card {
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(StabMonster({ damage: 20, manaCost: 3 }));
+        store.dispatch(StabMonster({ damage: 20, manaCost: 20 }));
     }
 }
 
-export const initialStabCard: StabCard = new StabCard('Stab', 3, 1, 'stab the enemie for 20dmg');
+export const initialStabCard: StabCard = new StabCard('Stab', 20, 1, 'stab the enemie for 20dmg');

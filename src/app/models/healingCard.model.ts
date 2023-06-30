@@ -12,8 +12,8 @@ export class HealCard extends Card {
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(HealPlayer({ heal: 20, manaCost: 2 }));
+        store.dispatch(HealPlayer({ heal: 20, manaCost: 20 }));
     }
 }
 
-export const initialHealCard: HealCard = new HealCard('Heal', 2, 2, 'gain 20pv');
+export const initialHealCard: HealCard = new HealCard('Heal', 30, 2, 'gain 20pv');

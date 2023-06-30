@@ -9,7 +9,8 @@ export const drawCard = createAction('[Game] Draw a card');
 
 export const hideCard = createAction('[Game] hide a card');
 
-export const updateHand = createAction(
+export const initHand = createAction(
     '[Game] Update Hand',
     props<{ hand: Card[] }>()
 );
+

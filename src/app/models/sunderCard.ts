@@ -13,8 +13,8 @@ export class SunderCard extends Card {
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(StabMonster({ damage: 75, manaCost: 5 }));
+        store.dispatch(StabMonster({ damage: 75, manaCost: 50 }));
     }
 }
 
-export const initialStabCard: SunderCard = new SunderCard('big hit', 3, 1, 'big hit');
+export const initialStabCard: SunderCard = new SunderCard('big hit', 50, 5, 'big hit');

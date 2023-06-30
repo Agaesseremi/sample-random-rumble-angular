@@ -17,4 +17,4 @@ export class ProtectionCard extends Card {
     }
 }
 
-export const initialStabCard: ProtectionCard = new ProtectionCard('protection', 3, 1, 'protection');
+export const initialStabCard: ProtectionCard = new ProtectionCard('protection', 30, 3, 'protection');

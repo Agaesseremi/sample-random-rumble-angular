@@ -13,8 +13,10 @@ export class AddManaMaxCard extends Card {
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(AddManaMax({ addManaMax: 10 }));
+        store.dispatch(AddManaMax({ addManaMax: 10, manaCost: 30 }));
+
+
     }
 }
 
-export const initialStabCard: AddManaMaxCard = new AddManaMaxCard('add mana max', 3, 1, 'add mana max');
+export const initialStabCard: AddManaMaxCard = new AddManaMaxCard('add mana max', 30, 6, 'add mana max');
