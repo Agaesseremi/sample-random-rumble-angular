@@ -8,3 +8,5 @@ export const AddManaMax = createAction('[Card] add manaMax', props<{ addManaMax:
 
 export const RemoveMana = createAction('[Card] remove manaMax', props<{ manaCost: number }>());
 
+export const Protection = createAction('[Card] protection', props<{ manaCost: number }>());
+

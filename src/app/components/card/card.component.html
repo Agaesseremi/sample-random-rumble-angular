@@ -1,10 +1,19 @@
-<div class="card center" *ngIf="Card">
-    <div class="card-body text-center">
-        <h5 class="card-title">{{ Card.name }}</h5>
-        <p>{{ Card.manaCost }}Mana</p>
-        <h3 class="card-title">{{ Card.description }}</h3>
-        <div class="row">
-            <app-button-card-capacity class="my-1 w-100" [Card]="Card" [Player]="Player"></app-button-card-capacity>
-        </div>
+<div class="card">
+    <header class="card__header">
+        <h1 class="card__title">{{ Card.name }}</h1>
+        <ul class="mana-cost">
+            <li class="mana">{{ Card.manaCost }}</li>
+            <!--<li class="mana--green"></li> -->
+        </ul>
+    </header>
+    <img class="card__image" src="../../../assets/{{ Card.image }}" />
+    <div class="card__classification">
+        <h2 class="card__class">Creature — Hydra</h2>
+        <img class="card__expansion" src="" />
+    </div>
+    <div class="card__description">
+        <p>{{ Card.description }}</p>
+        <p><app-button-card-capacity class="card-btn-capacity my-1 w-100" [Card]="Card"
+                [Player]="Player"></app-button-card-capacity></p>
     </div>
 </div>

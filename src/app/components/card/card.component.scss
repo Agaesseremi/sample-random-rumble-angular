@@ -1,0 +1,111 @@
+body {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.card {
+    width: calc(63px * 5);
+    height: calc(88px * 5);
+    border: 8px solid #000;
+    border-radius: 15px;
+    padding: 5px 2px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card__classification,
+.card__header {
+    border: 3px solid #666;
+    padding: 2px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5% / 100%;
+}
+
+.card__title {
+    font-size: 1em;
+    margin: 0;
+}
+
+.mana-cost {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.mana--green,
+.mana {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8em;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    background-color: #aaa;
+    margin: 0 .05em;
+}
+
+.mana--green {
+    background-color: black;
+}
+
+
+.card__description,
+.card__image {
+    border: 3px solid #666;
+    border-top: none;
+    margin: 0 5px;
+}
+
+.card__image {
+    height: 45%;
+    object-fit: cover;
+    border-bottom: none;
+}
+
+.card__class {
+    font-size: .9em;
+    margin: 0;
+}
+
+.card__description {
+    font-size: .9em;
+    padding: 0 .8em 0 .3em;
+    position: relative;
+    height: 36%;
+}
+
+.card__description::after {
+    content: "";
+    border: 3px solid #666;
+    position: absolute;
+    height: .7em;
+    width: 1.5em;
+    border-radius: 100%;
+    background: #ccc;
+    bottom: 0;
+    right: 50%;
+    transform: translate(50%, calc(50% + 1px));
+}
+
+.card__description p {
+    margin: .3em 0;
+}
+
+.card__power {
+    border: 3px solid #666;
+    padding: 0 .7em;
+    border-radius: 20% / 100%;
+    font-size: 1.1em;
+    font-weight: 500;
+    position: absolute;
+    right: -7px;
+    bottom: -10px;
+    background: #fff;
+}

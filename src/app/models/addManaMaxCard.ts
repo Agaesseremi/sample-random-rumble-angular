@@ -7,16 +7,15 @@ import { GameState } from 'src/app/reducers/game.reducer';
 export class AddManaMaxCard extends Card {
 
 
-    constructor(name: string, manaCost: number, id: number, description: string) {
-        super(name, manaCost, id, description);
+    constructor(name: string, manaCost: number, id: number, description: string, image: string) {
+        super(name, manaCost, id, description, image);
 
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(AddManaMax({ addManaMax: 10, manaCost: 30 }));
+        store.dispatch(AddManaMax({ addManaMax: 1, manaCost: this.manaCost }));
 
 
     }
 }
 
-export const initialStabCard: AddManaMaxCard = new AddManaMaxCard('add mana max', 30, 6, 'add mana max');

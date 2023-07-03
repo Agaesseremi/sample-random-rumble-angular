@@ -7,14 +7,13 @@ import { GameState } from 'src/app/reducers/game.reducer';
 export class SunderCard extends Card {
 
 
-    constructor(name: string, manaCost: number, id: number, description: string) {
-        super(name, manaCost, id, description);
+    constructor(name: string, manaCost: number, id: number, description: string, image: string) {
+        super(name, manaCost, id, description, image);
 
     }
 
     action(store: Store<GameState>) {
-        store.dispatch(StabMonster({ damage: 75, manaCost: 50 }));
+        store.dispatch(StabMonster({ damage: 75, manaCost: this.manaCost }));
     }
 }
 
-export const initialStabCard: SunderCard = new SunderCard('big hit', 50, 5, 'big hit');

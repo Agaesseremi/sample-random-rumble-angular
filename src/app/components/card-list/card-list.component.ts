@@ -26,7 +26,7 @@ export class CardListComponent implements OnInit {
       this.player = game.player;
       let hand: Card[] = []
       if (game.hand.length === 0) { // Generate random hand only if it hasn't been generated before
-        hand = this.getRandomCards([...this.cards], 4);
+        hand = this.getRandomCards([...this.cards], 3);
         this.store.dispatch(initHand({ hand }))
       }
       this.hand = game.hand.length ? game.hand : hand

@@ -31,12 +31,14 @@ export class Card {
     manaCost: number;
     id: number;
     description: string;
+    image: string;
 
-    constructor(name: string, manaCost: number, id: number, description: string) {
+    constructor(name: string, manaCost: number, id: number, description: string, image: string) {
         this.name = name;
         this.manaCost = manaCost;
         this.id = id;
         this.description = description;
+        this.image = image;
     }
 }
 

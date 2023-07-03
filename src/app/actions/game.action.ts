@@ -14,3 +14,7 @@ export const initHand = createAction(
     props<{ hand: Card[] }>()
 );
 
+export const RemoveProtection = createAction('[Game] remove protection');
+
+
+

@@ -5,14 +5,16 @@ import { ProtectionCard } from "./protectionCard";
 import { RollHandCard } from "./rollHandCard";
 import { SunderCard } from "./sunderCard";
 import { AddManaMaxCard } from "./addManaMaxCard";
+import { RestorationCard } from "./restorationCard.model";
 
 
 // Le state initial contiendra nos 4 joueurs
 export const initialCards: Card[] = [
-    new StabCard('Stab', 20, 1, 'stab the enemie for 20dmg'),
-    new HealCard('Heal', 30, 2, 'gain 20pv'),
-    new ProtectionCard('protection', 30, 3, 'protection'),
-    new RollHandCard('rollhand', 30, 4, 'roll hand'),
-    new SunderCard('big hit', 50, 5, 'big hit'),
-    new AddManaMaxCard('add mana max', 30, 6, 'add mana max')
+    new StabCard('Stab', 1, 1, 'stab the enemie for 20dmg', 'stab.jpeg'),
+    new HealCard('Heal', 2, 2, 'gain 20pv', 'heal.jpeg'),
+    new ProtectionCard('protection', 3, 3, 'protection from damage for 1 turn', 'protection.jpeg'),
+    new RollHandCard('brainstrom', 3, 4, 'discard your hand thn draw 3 cards', 'brainstorm.jpeg'),
+    new SunderCard('firaball', 5, 5, 'firaball !!!', 'fireball.jpeg'),
+    new AddManaMaxCard('growth spiral', 3, 6, 'add 1 to your manamax', 'growth-spiral.jpeg'),
+    new RestorationCard('restoration', 4, 7, 'restore between 20 to 50 hp', 'restoration.jpeg')
 ];

@@ -7,7 +7,7 @@ export interface IMonster {
 
 export const initialMonster: IMonster = {
     id: 1,
-    name: 'Monster',
+    name: 'Nicole Bolas',
     pvMax: 800,
     pv: 800,
 };

@@ -6,8 +6,8 @@ import { HandService } from 'src/app/services/hand-service.service';
 import { initHand } from "../actions/game.action";
 
 export class RollHandCard extends Card {
-    constructor(name: string, manaCost: number, id: number, description: string) {
-        super(name, manaCost, id, description);
+    constructor(name: string, manaCost: number, id: number, description: string, image: string) {
+        super(name, manaCost, id, description, image);
     }
 
     action(store: Store<{ game: GameState }>) {
@@ -19,4 +19,3 @@ export class RollHandCard extends Card {
     }
 }
 
-export const initialStabCard: RollHandCard = new RollHandCard('rollhand', 30, 4, 'roll hand');

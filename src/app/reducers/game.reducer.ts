@@ -4,14 +4,10 @@ import { IMonster, initialMonster } from '../models/monster.model';
 import { IPlayer, initialPlayers } from '../models/player.model';
 import { hitMonster } from '../actions/player.action';
 import { hitBack } from '../actions/monster.action';
-import { clearCheckIfPlayed, initHand } from "../actions/game.action";
+import { RemoveProtection, clearCheckIfPlayed, initHand } from "../actions/game.action";
 import { incrementGameTurn } from "../actions/game.action";
-import { initialStabCard } from '../models/stabCard.model';
-import { initialHealCard } from "../models/healingCard.model";
-import { StabCard } from "../models/stabCard.model";
-import { HealCard } from '../models/healingCard.model';
 import { initialCards } from "../models/card-list.model";
-import { AddManaMax, HealPlayer, RemoveMana, StabMonster } from "../actions/card.action";
+import { AddManaMax, HealPlayer, Protection, RemoveMana, StabMonster } from "../actions/card.action";
 import { Player } from "../models/player.model";
 import { state } from "@angular/animations";
 
@@ -23,6 +19,7 @@ export interface GameState {
     gameTurn: number;
     cards: Card[];
     hand: Card[];
+    protection: number;
 }
 
 export const initialState: GameState = {
@@ -31,7 +28,8 @@ export const initialState: GameState = {
     checkIfPlayed: [],
     gameTurn: 1,
     cards: initialCards,
-    hand: []
+    hand: [],
+    protection: 0,
 };
 
 
@@ -120,6 +118,22 @@ export const gameReducer = createReducer(
                 ...state.player,
                 mana: state.player.mana - manaCost
             }
+        };
+    }),
+    on(Protection, (state, { manaCost }) => {
+        return {
+            ...state,
+            protection: state.protection + 1,
+            player: {
+                ...state.player,
+                mana: state.player.mana - manaCost
+            }
+        };
+    }),
+    on(RemoveProtection, (state) => {
+        return {
+            ...state,
+            protection: state.protection - 1,
         };
     }),
 
