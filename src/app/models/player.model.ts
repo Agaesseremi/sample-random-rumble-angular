@@ -26,4 +26,4 @@ export class Player implements IPlayer {
 }
 
 // Le state initial contiendra nos 4 joueurs
-export const initialPlayers: IPlayer = new Player(1, 'Liliana', 100, 100, 3, 3)
+export const initialPlayers: IPlayer = new Player(1, 'Liliana', 100, 100, 5, 5)

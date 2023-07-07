@@ -1,0 +1,6 @@
+.disabled {
+    background-color: lightgray;
+    opacity: 0.5;
+    pointer-events: none;
+    /* optional: prevent click events on the disabled card */
+}

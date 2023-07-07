@@ -16,6 +16,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { gameReducer } from './reducers/game.reducer';
 import { ButtonCardCapacityComponent } from '../app/components/button-card-capacity/button-card-capacity.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { RestartButtonComponent } from './components/restart-button/restart-button.component';
+import { ModalLooseComponent } from './components/modal-loose/modal-loose.component';
+import { ButtonModalComponent } from './components/button-modal/button-modal.component';
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +34,10 @@ import { ButtonCardCapacityComponent } from '../app/components/button-card-capac
     CardListComponent,
     CardComponent,
     ButtonCardCapacityComponent,
+    ModalComponent,
+    RestartButtonComponent,
+    ModalLooseComponent,
+    ButtonModalComponent,
   ],
   imports: [
     BrowserModule,

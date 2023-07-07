@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { GameState } from 'src/app/reducers/game.reducer';
 import { hitMonster } from '../../actions/player.action';
-import { hitBack } from '../../actions/monster.action';
+import { MonsterGetProtection, MonsterHeal, hitBack } from '../../actions/monster.action';
 import { RemoveProtection, clearCheckIfPlayed, drawCard, initHand } from "../../actions/game.action";
 import { incrementGameTurn } from "../../actions/game.action";
 import { map } from 'rxjs/operators';
 import { HandService } from 'src/app/services/hand-service.service';
+import { Card } from 'src/app/models/card.model';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class ButtonCapacityComponent {
   checkIfPlayed: number[] = [];
   gameTurn: number = 1;
   protection: number = 0;
+
+
+
 
 
   constructor(private store: Store<{ game: GameState }>, private handService: HandService) {
@@ -43,23 +47,34 @@ export class ButtonCapacityComponent {
   onClick() {
     const manaMax = this.player.manaMax;;
     this.store.dispatch(incrementGameTurn({ manaMax: manaMax }));
-    console.log(this.gameTurn);
     if (this.protection === 1) {
       this.store.dispatch(RemoveProtection())
     } else {
-      const randomDamage = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
+      const randomDamage = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
       this.store.dispatch(hitBack({ damage: randomDamage }));
 
     }
 
-    this.handService.checkGameStatus();
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    if (randomNumber === 1) {
+      this.store.dispatch(MonsterGetProtection())
+    }
+
+    const randomNumberForHeal = Math.floor(Math.random() * 10) + 1;
+    if (randomNumberForHeal === 1) {
+      const randomHeal = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
+      this.store.dispatch(MonsterHeal({ heal: randomHeal }))
+    }
+
+
     // this.store.dispatch(drawCard())//add a card to the hand (need to do)
 
-
+    this.store.dispatch(clearCheckIfPlayed());
 
     let hand = this.handService.getRandomCards(4);
     this.store.dispatch(initHand({ hand }))
     // this.handService.generateRandomHand();
   }
+
 
 }

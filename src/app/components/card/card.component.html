@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [class.disabled]="checkIfPlayed.includes(Card.id)">
     <header class="card__header">
         <h1 class="card__title">{{ Card.name }}</h1>
         <ul class="mana-cost">
@@ -8,7 +8,7 @@
     </header>
     <img class="card__image" src="../../../assets/{{ Card.image }}" />
     <div class="card__classification">
-        <h2 class="card__class">Creature — Hydra</h2>
+        <h2 class="card__class">Sorcery</h2>
         <img class="card__expansion" src="" />
     </div>
     <div class="card__description">

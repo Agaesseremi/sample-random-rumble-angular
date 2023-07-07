@@ -1,0 +1,27 @@
+/* Modal styling */
+.modal {
+    display: block;
+    /* Hide the modal by default */
+    position: fixed;
+    /* Position it on top of other elements */
+    z-index: 1000;
+    /* Set a high z-index value */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scrolling if content exceeds viewport */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* 80% width */
+}

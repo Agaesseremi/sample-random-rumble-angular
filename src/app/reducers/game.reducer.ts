@@ -3,8 +3,8 @@ import { createReducer, createSelector, on } from '@ngrx/store';
 import { IMonster, initialMonster } from '../models/monster.model';
 import { IPlayer, initialPlayers } from '../models/player.model';
 import { hitMonster } from '../actions/player.action';
-import { hitBack } from '../actions/monster.action';
-import { RemoveProtection, clearCheckIfPlayed, initHand } from "../actions/game.action";
+import { MonsterGetProtection, MonsterHeal, MonsterRemoveProtection, hitBack } from '../actions/monster.action';
+import { CheckIfPlayed, RemoveProtection, clearCheckIfPlayed, initHand, openLooseModal, openModal, resetState } from "../actions/game.action";
 import { incrementGameTurn } from "../actions/game.action";
 import { initialCards } from "../models/card-list.model";
 import { AddManaMax, HealPlayer, Protection, RemoveMana, StabMonster } from "../actions/card.action";
@@ -15,11 +15,14 @@ import { state } from "@angular/animations";
 export interface GameState {
     monster: IMonster;
     player: Player;
-    checkIfPlayed: Array<number>;
+    checkIfPlayed: number[];
     gameTurn: number;
     cards: Card[];
     hand: Card[];
     protection: number;
+    MonsterProtection: boolean;
+    isModalOpen: boolean;
+    isLooseModalOpen: boolean;
 }
 
 export const initialState: GameState = {
@@ -30,6 +33,10 @@ export const initialState: GameState = {
     cards: initialCards,
     hand: [],
     protection: 0,
+    MonsterProtection: false,
+    isModalOpen: false,
+    isLooseModalOpen: false,
+
 };
 
 
@@ -37,10 +44,36 @@ export const gameReducer = createReducer(
     initialState,
     //method jeux de base
 
+    on(resetState, (state) => initialState),
+
+    on(openModal, (state) => ({
+        ...state,
+        isModalOpen: true
+    })),
+    on(openLooseModal, (state) => ({
+        ...state,
+        isLooseModalOpen: true
+    })),
+
     on(initHand, (state, { hand }) => ({
         ...state,
         hand: hand
     })),
+
+    on(MonsterGetProtection, (state) => ({
+        ...state,
+        MonsterProtection: true
+    })),
+
+    on(MonsterRemoveProtection, (state, { manaCost }) => ({
+        ...state,
+        MonsterProtection: false,
+        player: {
+            ...state.player,
+            mana: state.player.mana - manaCost  // Updated the assignment
+        }
+    })),
+
 
     on(hitMonster, (state, { damage }) => {
         return {
@@ -51,6 +84,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(AddManaMax, (state, { addManaMax, manaCost }) => {
         return {
             ...state,
@@ -61,6 +95,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(StabMonster, (state, { damage, manaCost }) => {
         return {
             ...state,
@@ -74,6 +109,17 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
+    on(MonsterHeal, (state, { heal }) => {
+        return {
+            ...state,
+            monster: {
+                ...state.monster,
+                pv: state.monster.pv + heal
+            }
+        }
+    }),
+
     on(HealPlayer, (state, { heal, manaCost }) => {
         return {
             ...state,
@@ -84,15 +130,22 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(clearCheckIfPlayed, (state) => {
         return {
             ...state,
             checkIfPlayed: []
         };
     }),
+    on(CheckIfPlayed, (state, { playerId }) => {
+        console.log(playerId);
+        return {
+            ...state,
+            checkIfPlayed: [...state.checkIfPlayed, playerId]
+        };
+    }),
 
     on(incrementGameTurn, (state, { manaMax }) => {
-        console.log(manaMax);
         return {
             ...state,
             gameTurn: state.gameTurn + 1,
@@ -102,6 +155,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(hitBack, (state, { damage }) => {
         return {
             ...state,
@@ -111,6 +165,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(RemoveMana, (state, { manaCost }) => {
         return {
             ...state,
@@ -120,6 +175,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(Protection, (state, { manaCost }) => {
         return {
             ...state,
@@ -130,6 +186,7 @@ export const gameReducer = createReducer(
             }
         };
     }),
+
     on(RemoveProtection, (state) => {
         return {
             ...state,

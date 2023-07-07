@@ -1,4 +1,10 @@
 <div class="App">
+  <div *ngIf="isModalOpen">
+    <app-modal></app-modal>
+  </div>
+  <div *ngIf="isLooseModalOpen">
+    <app-modal-loose></app-modal-loose>
+  </div>
   <div class="row">
     <app-player-list class='col-6'></app-player-list>
     <app-monster class="col-6"></app-monster>

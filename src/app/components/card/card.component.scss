@@ -2,6 +2,11 @@ body {
     font-family: "Helvetica Neue", sans-serif;
 }
 
+.disabled {
+    opacity: 0.5; // Example styling to visually disable the card
+    pointer-events: none; // Example styling to disable pointer events on the card
+}
+
 * {
     box-sizing: border-box;
 }
@@ -108,4 +113,11 @@ body {
     right: -7px;
     bottom: -10px;
     background: #fff;
+}
+
+.card.disabled {
+    // Styles for when the card is disabled
+    opacity: 0.5; // Example styling change for a disabled card
+    pointer-events: none; // Prevent interaction with the disabled card
+    // Add
 }

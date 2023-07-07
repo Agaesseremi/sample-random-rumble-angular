@@ -16,6 +16,7 @@ export class CardListComponent implements OnInit {
   player?: Player;
   hand?: Card[];
   randomHandGenerated = false; // Flag to track if the random hand has been generated
+  checkIfPlayed: Array<number> = [];
 
   // Récupérons le store grace a l'injection de dépendance
   constructor(private store: Store<{ game: GameState }>) { }
@@ -24,13 +25,17 @@ export class CardListComponent implements OnInit {
     this.store.select(state => state.game).subscribe((game: GameState) => {
       this.cards = game.cards;
       this.player = game.player;
+      this.checkIfPlayed = game.checkIfPlayed;
+      console.log(this.checkIfPlayed);
+
       let hand: Card[] = []
       if (game.hand.length === 0) { // Generate random hand only if it hasn't been generated before
-        hand = this.getRandomCards([...this.cards], 3);
+        hand = this.getRandomCards([...this.cards], 4);
         this.store.dispatch(initHand({ hand }))
       }
       this.hand = game.hand.length ? game.hand : hand
-      console.log(this.hand);
+      // console.log(this.checkIfPlayed);
+
     })
   }
 

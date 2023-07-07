@@ -3,7 +3,7 @@ import { RemoveMana, StabMonster } from '../actions/card.action';
 import { Store, select } from '@ngrx/store';
 import { GameState } from 'src/app/reducers/game.reducer';
 import { HandService } from 'src/app/services/hand-service.service';
-import { initHand } from "../actions/game.action";
+import { clearCheckIfPlayed, initHand } from "../actions/game.action";
 
 export class RollHandCard extends Card {
     constructor(name: string, manaCost: number, id: number, description: string, image: string) {
@@ -11,6 +11,7 @@ export class RollHandCard extends Card {
     }
 
     action(store: Store<{ game: GameState }>) {
+        store.dispatch(clearCheckIfPlayed());
         const handService = new HandService(store); // Create an instance of HandService
 
         let hand = handService.getRandomCards(4);

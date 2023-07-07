@@ -8,6 +8,14 @@
               <div class="col">
                 <span class="badge badge-danger ml-2" id="degatSpanMonster"></span>
                 <img class="img-fluid custom-img" src="../../../assets/nicol-bolas-1920.jpg" alt="monster" />
+                <!-- other code -->
+                <!-- test if var ngIf work <p class="text-white">{{ MonsterProtection ? 'test' : 'no' }}</p> -->
+                <div *ngIf="MonsterProtection">
+
+                  <i class="fa-solid fa-shield fa-beat fa-2xl" style="color: #ffffff;"></i>
+                </div>
+
+                <!-- other code -->
               </div>
             </div>
           </div>
